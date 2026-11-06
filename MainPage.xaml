@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:models="clr-namespace:AppSquiliteS5.Models" x:Class="AppSquiliteS5.MainPage" BackgroundColor="White">
+ <ContentPage.Content>
+  <VerticalStackLayout>
+   <Label Text="Taller Semana 5" HorizontalOptions="Center" FontSize="18" TextColor="Black" />
+   <Label Text="BASE DE DATOS LOCALES" FontSize="18" HorizontalOptions="Center" TextColor="Black" />
+   <Grid Padding="20,55,20,20" RowSpacing="12" RowDefinitions="Auto,Auto,Auto,Auto,*">
+    <Entry Grid.Row="1" x:Name="NameEntry" Placeholder="Ingrese el nombre" MaxLength="60" ReturnType="Done" Completed="OnAddClicked" />
+    <Grid Grid.Row="2" ColumnDefinitions="*,*" ColumnSpacing="10">
+     <Button Grid.Column="0" Text="Agregar Persona" Clicked="OnAddClicked" />
+     <Button Grid.Column="1" Text="Mostrar Personas" Clicked="OnShowClicked" />
+    </Grid>
+    <Button Grid.Row="3" Text="Eliminar seleccionado" Clicked="OnDeleteClicked" BackgroundColor="#B23A48" TextColor="White" />
+    <CollectionView Grid.Row="4" x:Name="PeopleList" SelectionMode="Single" SelectionChanged="OnSelectionChanged">
+     <CollectionView.EmptyView>
+      <Label Text="Pulsa Mostrar Personas para ver la lista" Margin="10,10" TextColor="Gray" HorizontalTextAlignment="Center" />
+     </CollectionView.EmptyView>
+     <CollectionView.ItemTemplate>
+      <DataTemplate x:DataType="models:Persona">
+       <Grid Padding="12,10" ColumnDefinitions="50,*">
+        <VisualStateManager.VisualStateGroups>
+         <VisualStateGroup Name="CommonStates">
+          <VisualState Name="Normal"><VisualState.Setters><Setter Property="BackgroundColor" Value="White" /></VisualState.Setters></VisualState>
+          <VisualState Name="Selected"><VisualState.Setters><Setter Property="BackgroundColor" Value="#E8E8E8" /></VisualState.Setters></VisualState>
+         </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        <Label Grid.Column="0" Text="{Binding Id}" TextColor="Black" />
+        <Label Grid.Column="1" Text="{Binding Nombre}" TextColor="Black" />
+       </Grid>
+      </DataTemplate>
+     </CollectionView.ItemTemplate>
+    </CollectionView>
+   </Grid>
+   
+  </VerticalStackLayout>
+  
+ </ContentPage.Content>
+
+</ContentPage>
